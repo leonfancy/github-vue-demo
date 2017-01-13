@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <header>
-      <router-link to="/repos">All Repositories</router-link>
+      <router-link to="/">Home</router-link>
+      <router-link to="/repos">Repositories</router-link>
     </header>
 
     <router-view></router-view>
@@ -23,6 +24,15 @@
 
   header {
     margin-top: 1em;
+    text-align: center;
+  }
+
+  header a {
+    margin-right: 2em;
+  }
+
+  header a:last-child {
+    margin-right: 0;
   }
 
   ul {
