@@ -1,6 +1,6 @@
 <template>
   <div class="repo-view">
-    <h1>All commits</h1>
+    <h1>All commits of {{ repoName }}</h1>
     <spinner :show="isLoading"></spinner>
     <p>
       <router-link :to="pages.prev">Prev</router-link> | <router-link :to="pages.next">Next</router-link>
@@ -43,6 +43,9 @@
     },
 
     computed: {
+      repoName: function () {
+        return this.$route.params.owner + '/' + this.$route.params.repo;
+      },
       page: function () {
         return Number(this.$route.query.page) || 1;
       },
@@ -56,9 +59,7 @@
 
     methods: {
       loadCommits: function (page) {
-        let owner = this.$route.params.owner;
-        let repo = this.$route.params.repo;
-        let url = `https://api.github.com/repos/${owner}/${repo}/commits?page=${this.page}`;
+        let url = `https://api.github.com/repos/${this.repoName}/commits?page=${this.page}`;
         this.isLoading = true;
         this.$http.get(url).then((response) => {
           this.commits = response.body;
