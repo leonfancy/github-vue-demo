@@ -9,14 +9,12 @@ Vue.use(VueRouter);
 Vue.use(VueResource);
 
 const routes = [
-  { path: '/repos', component: RepoListView },
-  { path: '/repos/:owner/:repo/commits', name: 'repo-commits', component: CommitsListView }
+  {path: '/repos', component: RepoListView},
+  {path: '/repos/:owner/:repo/commits', name: 'repo-commits', component: CommitsListView}
 ];
 
-const router = new VueRouter({mode:'history', routes});
-
 new Vue({
-  router: router,
+  router: new VueRouter({mode: 'history', routes}),
   el: '#app',
   render: h => h(App)
 });

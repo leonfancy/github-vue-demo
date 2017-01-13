@@ -2,6 +2,10 @@
   <div class="repo-view">
     <h1>All commits</h1>
     <spinner :show="isLoading"></spinner>
+    <p>
+      <router-link :to="pages.prev">Prev</router-link> |
+      <router-link :to="pages.next">Next</router-link>
+    </p>
     <ul>
       <li v-if="commit.committer" class="commit-item" v-for="commit in commits">
         <img :src="commit.committer.avatar_url">
@@ -23,7 +27,7 @@
     beforeMount: function () {
       let owner = this.$route.params.owner;
       let repo = this.$route.params.repo;
-      let url = `https://api.github.com/repos/${owner}/${repo}/commits`;
+      let url = `https://api.github.com/repos/${owner}/${repo}/commits?page=${this.page}`;
       this.$http.get(url).then((response) => {
         this.commits = response.body;
         this.isLoading = false;
@@ -33,6 +37,17 @@
       return {
         commits: [],
         isLoading: true
+      }
+    },
+    computed: {
+      page: function () {
+        return Number(this.$route.query.page) || 1;
+      },
+      pages: function () {
+        return {
+          prev: {path: this.$route.path, query: {page: this.page - 1}},
+          next: {path: this.$route.path, query: {page: this.page + 1}},
+        }
       }
     },
 
