@@ -1,0 +1,38 @@
+<template>
+  <li class="repo-item">
+    <img :src="repo.owner.avatar_url">
+    <div>
+      <h3>
+        <router-link :to="{ name: 'repo-commits', params: {owner: repo.owner.login, repo: repo.name} }">
+          {{ repo.full_name }}
+        </router-link>
+      </h3>
+      <p>{{ repo.description }}</p>
+    </div>
+  </li>
+</template>
+
+<script>
+  export default {
+    props: ['repo'],
+    name: 'repo-item'
+  }
+</script>
+
+<style>
+  li.repo-item {
+    display: flex;
+    margin-bottom: 1.5em;
+  }
+
+  .repo-item img {
+    width: 60px;
+    height: 60px;
+    margin-right: 2em;
+  }
+
+  .repo-item h3 {
+    margin: 0;
+    font-weight: normal;
+  }
+</style>
