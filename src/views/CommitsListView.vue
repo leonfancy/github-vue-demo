@@ -3,15 +3,14 @@
     <h1>All commits</h1>
     <spinner :show="isLoading"></spinner>
     <p>
-      <router-link :to="pages.prev">Prev</router-link> |
-      <router-link :to="pages.next">Next</router-link>
+      <router-link :to="pages.prev">Prev</router-link> | <router-link :to="pages.next">Next</router-link>
     </p>
     <ul>
       <li v-if="commit.committer" class="commit-item" v-for="commit in commits">
         <img :src="commit.committer.avatar_url">
         <div class="commit-item-desc">
           <p class="commit-message">{{ commit.commit.message | truncate(100) }}</p>
-          <p><b>{{ commit.commit.author.name }}</b> committed on {{ commit.commit.author.date | timeAgo }}</p>
+          <p><b>{{ commit.commit.author.name }}</b> committed on {{ commit.commit.author.date | extractDate }}</p>
         </div>
       </li>
     </ul>
@@ -19,26 +18,30 @@
 </template>
 
 <script>
-  import {truncate, timeAgo} from '../filters'
+  import {truncate, extractDate} from '../filters'
   import Spinner from '../components/Spinner.vue'
 
   export default {
     name: 'repo-detail',
+    components: {Spinner},
+
     beforeMount: function () {
-      let owner = this.$route.params.owner;
-      let repo = this.$route.params.repo;
-      let url = `https://api.github.com/repos/${owner}/${repo}/commits?page=${this.page}`;
-      this.$http.get(url).then((response) => {
-        this.commits = response.body;
-        this.isLoading = false;
-      });
+      this.loadCommits(this.page);
     },
+
     data: function () {
       return {
         commits: [],
         isLoading: true
       }
     },
+
+    watch: {
+      page: function (newPage) {
+        this.loadCommits(newPage);
+      }
+    },
+
     computed: {
       page: function () {
         return Number(this.$route.query.page) || 1;
@@ -51,8 +54,22 @@
       }
     },
 
-    components: {Spinner},
-    filters: {truncate, timeAgo}
+    methods: {
+      loadCommits: function (page) {
+        let owner = this.$route.params.owner;
+        let repo = this.$route.params.repo;
+        let url = `https://api.github.com/repos/${owner}/${repo}/commits?page=${this.page}`;
+        this.isLoading = true;
+        this.$http.get(url).then((response) => {
+          this.commits = response.body;
+          this.isLoading = false;
+        });
+      }
+    },
+
+    filters: {
+      truncate, extractDate
+    }
   }
 </script>
 
