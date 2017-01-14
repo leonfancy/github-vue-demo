@@ -1,6 +1,6 @@
-# my-webpack
+# A Vue demo project which use GitHub API
 
-> A Vue.js project
+> A Vue.js demo project
 
 ## Build Setup
 
