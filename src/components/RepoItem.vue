@@ -2,11 +2,11 @@
   <li class="repo-item">
     <img :src="repo.owner.avatar_url">
     <div>
-      <h3>
+      <h4>
         <router-link :to="{ name: 'repo-commits', params: {owner: repo.owner.login, repo: repo.name} }">
           {{ repo.full_name }}
         </router-link>
-      </h3>
+      </h4>
       <p>{{ repo.description }}</p>
     </div>
   </li>
@@ -31,8 +31,8 @@
     margin-right: 2em;
   }
 
-  .repo-item h3 {
-    margin: 0;
+  .repo-item h4 {
+    margin-top: 0;
     font-weight: normal;
   }
 </style>

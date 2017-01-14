@@ -6,6 +6,11 @@ import RepoListView from './views/RepoListView.vue'
 import CommitsListView from './views/CommitsListView.vue'
 import HomeView from './views/HomeView.vue'
 
+// bootstrap and jQuery
+window.$ = window.jQuery = require('jquery');
+require('bootstrap-sass');
+
+
 Vue.use(VueRouter);
 Vue.use(VueResource);
 

@@ -5,7 +5,9 @@
       <router-link to="/repos">Repositories</router-link>
     </header>
 
-    <router-view></router-view>
+    <div class="containner">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -15,7 +17,11 @@
   }
 </script>
 
-<style>
+<style rel="stylesheet/scss" lang="scss">
+
+  $bootstrap-sass-asset-helper: true;
+  @import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
   #app {
     font-family: Helvetica, Arial, sans-serif;
     margin: auto;
