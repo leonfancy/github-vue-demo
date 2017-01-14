@@ -16,7 +16,7 @@
     name: 'repo-list',
     components: {RepoItem, Spinner},
     beforeMount: function () {
-      this.$http.get('https://api.github.com/repositories').then((response) => {
+      this.$http.get('repositories').then((response) => {
         this.isLoading = false;
         this.repos = response.body;
       });

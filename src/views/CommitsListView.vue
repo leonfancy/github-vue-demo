@@ -59,9 +59,8 @@
 
     methods: {
       loadCommits: function (page) {
-        let url = `https://api.github.com/repos/${this.repoName}/commits?page=${this.page}`;
         this.isLoading = true;
-        this.$http.get(url).then((response) => {
+        this.$http.get(`repos/${this.repoName}/commits?page=${this.page}`).then((response) => {
           this.commits = response.body;
           this.isLoading = false;
         });

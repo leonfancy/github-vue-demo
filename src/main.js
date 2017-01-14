@@ -15,6 +15,8 @@ const routes = [
   {path: '/repos/:owner/:repo/commits', name: 'repo-commits', component: CommitsListView}
 ];
 
+Vue.http.options.root = 'https://api.github.com';
+
 new Vue({
   router: new VueRouter({mode: 'history', routes}),
   el: '#app',
