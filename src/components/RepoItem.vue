@@ -14,8 +14,8 @@
 
 <script>
   export default {
-    props: ['repo'],
-    name: 'repo-item'
+    name: 'repo-item',
+    props: ['repo']
   }
 </script>
 

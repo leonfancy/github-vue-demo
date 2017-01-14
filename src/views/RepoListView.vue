@@ -13,7 +13,7 @@
   import Spinner from '../components/Spinner.vue';
 
   export default {
-    name: 'repo-list',
+    name: 'repo-list-view',
     components: {RepoItem, Spinner},
     beforeMount: function () {
       this.$http.get('repositories').then((response) => {

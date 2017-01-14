@@ -22,7 +22,7 @@
   import Spinner from '../components/Spinner.vue'
 
   export default {
-    name: 'repo-detail',
+    name: 'commits-list-view',
     components: {Spinner},
 
     beforeMount: function () {
